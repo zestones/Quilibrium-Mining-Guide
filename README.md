@@ -179,7 +179,7 @@ Rien ne devrait s'afficher pour le moment, car nous n'avons pas encore lancé le
 Sur une autre fenêtre de terminal, vous pouvez lancer le service avec la commande suivante:
 
 ```bash
-service ceremonyclient start
+sudo service ceremonyclient start
 ```
 
 Vous pouvez maintenant vérifier le journal du service pour voir si tout fonctionne correctement.
@@ -189,9 +189,9 @@ Vous pouvez maintenant vérifier le journal du service pour voir si tout fonctio
 Pour démarrer le **Noeud**, vous pouvez utiliser la commande suivante:
 
 ```bash
-service ceremonyclient start                                      # pour démarrer le service
-service ceremonyclient stop                                       # pour arrêter le service
-service ceremonyclient status                                     # pour vérifier le statut du service (CTRL+C pour quitter)
+sudo service ceremonyclient start                                      # pour démarrer le service
+sudo service ceremonyclient stop                                       # pour arrêter le service
+sudo service ceremonyclient status                                     # pour vérifier le statut du service (CTRL+C pour quitter)
 sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat # pour afficher le journal du service
 ```
 
