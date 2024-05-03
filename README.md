@@ -66,7 +66,7 @@ GOPATH=$HOME/go
 PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-> [!TIP] \
+> [!TIP]
 > Le fichier `.bashrc` est un fichier caché dans votre répertoire personnel. \
 > Il est situé dans `~/.bashrc`. Vous pouvez l'éditer avec votre éditeur de texte préféré.
 
@@ -99,7 +99,7 @@ GOEXPERIMENT=arenas go run ./...
 
 Après quelques minutes, une fois que les clés ont été générées, vous pouvez tuer le processus avec `Ctrl+C` et redémarrer votre machine.
 
->[!WARNING] \
+> [!WARNING]
 > Ne pas oublier de sauvegarder les clés générées dans un endroit sûr. \
 > Les clés sont stockées dans le répertoire `/ceremonyclient/node/.config/`. \
 > Copier les fichiers `config.yml` et `keys.yml` dans un dossier sécurisé.
@@ -161,7 +161,7 @@ avec 8 le nombre de coeurs et 90% la limite de CPU par coeur.
 
 Ce script va également redémarrer le service en cas d'arrêt (utile en cas de crash).
 
-> [!WARNING] \
+> [!WARNING]
 > Assurez-vous de remplacer le chemin du répertoire de travail (`WorkingDirectory`) et le chemin du binaire (`ExecStart`) par les vôtres.
 > Faire `pwd` pour obtenir le chemin absolu du répertoire de travail.
 
