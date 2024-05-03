@@ -195,6 +195,10 @@ sudo service ceremonyclient status                                     # pour vÃ
 sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat # pour afficher le journal du service
 ```
 
+> [!IMPORTANT]
+> Pour voir son addresse publique il faut ce rendre dans ``ceremonyclient/node``et lancer la commande suivante : \
+> ``GOEXPERIMENT=arenas go run ./... -peer-id``
+
 ## Resources
 
 - [Official Website Quilibrium](https://quilibrium.com/)
