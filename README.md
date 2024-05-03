@@ -166,7 +166,7 @@ Ce script va également redémarrer le service en cas d'arrêt (utile en cas de 
 > Faire `pwd` pour obtenir le chemin absolu du répertoire de travail.
 
 ```bash
-systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 
 Maintenant, pour ouvrir le journal du service, vous pouvez utiliser la commande suivante:
