@@ -3,7 +3,7 @@
 Ce guide vous permettra de configurer un noeud de minage pour le réseau Quilibrium.
 voir [Resources](#resources) pour plus d'informations.
 
-## Prérequis
+## Pré-requis
 
 Dans ce guide, nous utiliserons WSL (Windows Subsystem for Linux) [guide](https://docs.microsoft.com/en-us/windows/wsl/install) pour installer notre noeud de minage. Vous pouvez également utiliser un système d'exploitation Linux.
 
@@ -18,7 +18,7 @@ Dans ce guide, nous utiliserons WSL (Windows Subsystem for Linux) [guide](https:
 
 ## Installation
 
-Avant de continuer, assurez-vous d'avoir rempli les [prérequis](#prérequis).
+Avant de continuer, assurez-vous d'avoir rempli les [prérequis](#pré-requis).
 
 ## Mise en place de l'environnement
 
@@ -66,7 +66,7 @@ GOPATH=$HOME/go
 PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-> **NOTE** \
+> [!TIP] \
 > Le fichier `.bashrc` est un fichier caché dans votre répertoire personnel. \
 > Il est situé dans `~/.bashrc`. Vous pouvez l'éditer avec votre éditeur de texte préféré.
 
@@ -99,7 +99,7 @@ GOEXPERIMENT=arenas go run ./...
 
 Après quelques minutes, une fois que les clés ont été générées, vous pouvez tuer le processus avec `Ctrl+C` et redémarrer votre machine.
 
-> **ATTENTION** \
+> [!WARNING] \
 > Ne pas oublier de sauvegarder les clés générées dans un endroit sûr. \
 > Les clés sont stockées dans le répertoire `/ceremonyclient/node/.config/`. \
 > Copier les fichiers `config.yml` et `keys.yml` dans un dossier sécurisé.
@@ -112,23 +112,29 @@ Copiez cette clé et sauvegardez-la dans un fichier.
 Nous allons avoir besoin de générer le binaire du noeud de minage pour pouvoir le lancer en tant que service.
 
 ```bash
-cd ~/ceremonyclient/node
+cd ceremonyclient/node
 GOEXPERIMENT=arenas go install ./...
 ```
 
 Cette commande devrait créer un répertoire `~/go/bin/`. Vérifiez cela avec la commande suivante, et le message `node` devrait apparaître dans la console.
 
 ```bash
-ls /root/go/bin
+ls ~/go/bin
 ```
 
 Nous allons maintenant créer un fichier de configuration pour notre service _systemd_.
 
 ```bash
-touch /lib/systemd/system/ceremonyclient.service
+sudo touch /lib/systemd/system/ceremonyclient.service
 ```
 
 Cela va créer un fichier vide dans le répertoire `/lib/systemd/system/`.
+Il est possible que vous ayez besoin d'ajouter des droits d'écriture à ce fichier.
+
+```bash
+sudo chmod a+w /lib/systemd/system/ceremonyclient.service
+```
+
 Vous pouvez maintenant éditer ce fichier avec votre éditeur de texte préféré et y ajouter le contenu suivant:
 
 ```bash
@@ -155,15 +161,15 @@ avec 8 le nombre de coeurs et 90% la limite de CPU par coeur.
 
 Ce script va également redémarrer le service en cas d'arrêt (utile en cas de crash).
 
-Maintenant, pour activer le service, vous pouvez exécuter les commandes suivantes:
+> [!WARNING] \
+> Assurez-vous de remplacer le chemin du répertoire de travail (`WorkingDirectory`) et le chemin du binaire (`ExecStart`) par les vôtres.
+> Faire `pwd` pour obtenir le chemin absolu du répertoire de travail.
 
 ```bash
 systemctl daemon-reload
-systemctl enable ceremonyclient
-systemctl start ceremonyclient
 ```
 
-Pour ouvrir le journal du service, vous pouvez utiliser la commande suivante:
+Maintenant, pour ouvrir le journal du service, vous pouvez utiliser la commande suivante:
 
 ```bash
 sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat
@@ -180,16 +186,13 @@ Vous pouvez maintenant vérifier le journal du service pour voir si tout fonctio
 
 ## Commandes du Service
 
-Pour arrêter le service, vous pouvez utiliser la commande suivante:
+Pour démarrer le **Noeud**, vous pouvez utiliser la commande suivante:
 
 ```bash
-service ceremonyclient stop
-```
-
-Pour redémarrer le service, vous pouvez utiliser la commande suivante:
-
-```bash
-service ceremonyclient start
+service ceremonyclient start                                      # pour démarrer le service
+service ceremonyclient stop                                       # pour arrêter le service
+service ceremonyclient status                                     # pour vérifier le statut du service (CTRL+C pour quitter)
+sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat # pour afficher le journal du service
 ```
 
 ## Resources
