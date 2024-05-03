@@ -99,7 +99,7 @@ GOEXPERIMENT=arenas go run ./...
 
 Après quelques minutes, une fois que les clés ont été générées, vous pouvez tuer le processus avec `Ctrl+C` et redémarrer votre machine.
 
-> [!WARNING] \
+>[!WARNING] \
 > Ne pas oublier de sauvegarder les clés générées dans un endroit sûr. \
 > Les clés sont stockées dans le répertoire `/ceremonyclient/node/.config/`. \
 > Copier les fichiers `config.yml` et `keys.yml` dans un dossier sécurisé.
