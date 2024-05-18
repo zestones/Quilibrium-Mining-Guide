@@ -19,20 +19,26 @@ process_log_entry() {
 
     # Write to ¥output log file if frame_number is present
     if [[ -n "$frame_number" ]]; then
-        echo "$readable_timestamp, Block ID: $frame_number >> "$output_log_file""
+        echo "$readable_timestamp, Block ID: $frame_number" >> "$output_log_file"
     fi
 }
 
 # Run journalctl command and process each line
 last_frame_number=0
+
 $journalctl_cmd | while read -r line; do
     new_frame_number=$(echo "$line" | grep -oP '(?<="frame_number":)\d+')
-    # Check if new block is mined last_frame_number != new_frame_number
-    if [[ "$last_frame_number" != "$new_frame_number" ]]; then
-        last_frame_number=$new_frame_number
 
-        # Process log entry
-        process_log_entry "$line"
+    # Check if new_frame_number is found and not empty
+    if [[ -n "$new_frame_number" ]]; then
+        # Check if new block is mined (last_frame_number != new_frame_number)
+        echo "last_frame_number: $last_frame_number, new_frame_number: $new_frame_number"
+        if [[ "$last_frame_number" -ne "$new_frame_number" ]]; then
+            last_frame_number=$new_frame_number
+
+            # Process log entry
+            process_log_entry "$line"
+        fi
     fi
 
     # Print log entry
