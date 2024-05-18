@@ -66,7 +66,7 @@ GOPATH=$HOME/go
 PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
-> [!TIP] \
+> [!TIP]
 > Le fichier `.bashrc` est un fichier caché dans votre répertoire personnel. \
 > Il est situé dans `~/.bashrc`. Vous pouvez l'éditer avec votre éditeur de texte préféré.
 
@@ -99,7 +99,7 @@ GOEXPERIMENT=arenas go run ./...
 
 Après quelques minutes, une fois que les clés ont été générées, vous pouvez tuer le processus avec `Ctrl+C` et redémarrer votre machine.
 
-> [!WARNING] \
+> [!WARNING]
 > Ne pas oublier de sauvegarder les clés générées dans un endroit sûr. \
 > Les clés sont stockées dans le répertoire `/ceremonyclient/node/.config/`. \
 > Copier les fichiers `config.yml` et `keys.yml` dans un dossier sécurisé.
@@ -161,12 +161,12 @@ avec 8 le nombre de coeurs et 90% la limite de CPU par coeur.
 
 Ce script va également redémarrer le service en cas d'arrêt (utile en cas de crash).
 
-> [!WARNING] \
+> [!WARNING]
 > Assurez-vous de remplacer le chemin du répertoire de travail (`WorkingDirectory`) et le chemin du binaire (`ExecStart`) par les vôtres.
 > Faire `pwd` pour obtenir le chemin absolu du répertoire de travail.
 
 ```bash
-systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 
 Maintenant, pour ouvrir le journal du service, vous pouvez utiliser la commande suivante:
@@ -179,7 +179,7 @@ Rien ne devrait s'afficher pour le moment, car nous n'avons pas encore lancé le
 Sur une autre fenêtre de terminal, vous pouvez lancer le service avec la commande suivante:
 
 ```bash
-service ceremonyclient start
+sudo service ceremonyclient start
 ```
 
 Vous pouvez maintenant vérifier le journal du service pour voir si tout fonctionne correctement.
@@ -189,11 +189,15 @@ Vous pouvez maintenant vérifier le journal du service pour voir si tout fonctio
 Pour démarrer le **Noeud**, vous pouvez utiliser la commande suivante:
 
 ```bash
-service ceremonyclient start                                      # pour démarrer le service
-service ceremonyclient stop                                       # pour arrêter le service
-service ceremonyclient status                                     # pour vérifier le statut du service (CTRL+C pour quitter)
+sudo service ceremonyclient start                                      # pour démarrer le service
+sudo service ceremonyclient stop                                       # pour arrêter le service
+sudo service ceremonyclient status                                     # pour vérifier le statut du service (CTRL+C pour quitter)
 sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat # pour afficher le journal du service
 ```
+
+> [!IMPORTANT]
+> Pour voir son addresse publique il faut ce rendre dans ``ceremonyclient/node``et lancer la commande suivante : \
+> ``GOEXPERIMENT=arenas go run ./... -peer-id``
 
 ## Resources
 
