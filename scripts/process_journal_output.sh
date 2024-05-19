@@ -64,7 +64,7 @@ process_log_entry() {
 
 
 # Start the ceremonyclient service
-# sudo service ceremonyclient start 
+sudo service ceremonyclient start 
 first_run=true
 $journalctl_cmd | while read -r line; do
     new_frame_number=$(echo "$line" | grep -oP '(?<="frame_number":)\d+')
