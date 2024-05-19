@@ -64,7 +64,7 @@ process_log_entry() {
 
 
 # Start the ceremonyclient service
-sudo service ceremonyclient start 
+# sudo service ceremonyclient start 
 first_run=true
 $journalctl_cmd | while read -r line; do
     new_frame_number=$(echo "$line" | grep -oP '(?<="frame_number":)\d+')
@@ -79,10 +79,11 @@ $journalctl_cmd | while read -r line; do
             process_log_entry "$line" "$first_run"
             first_run=false
         fi
-    fi
     # check if we find this message Stopped Ceremony Client Go App Service.
-    elif [[ "$line" == *"Stopped Ceremony Client Go App Service."* ]]; then
-        first_run=true
+    else
+        if [[ "$line" == *"Stopped Ceremony Client Go App Service."* ]]; then
+            first_run=true
+        fi
     fi
 
     # Print log entry to console

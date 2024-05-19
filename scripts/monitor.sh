@@ -9,6 +9,12 @@ output_log_file=$(grep -oP '(?<=output_log_file=).*' ./.conf)
 
 # ----------------------------------------------------------------------------------------------- #
 
+# request script to be run with sudo
+if [[ $EUID -ne 0 ]]; then
+    echo "Please run this script with sudo."
+    exit 1
+fi
+
 # If the output_log_file is not found in the ./.conf file, set a default value
 if [[ -z "$output_log_file" ]]; then
     echo "output_log_file not found in .conf file. Exiting..."
@@ -40,7 +46,7 @@ analyze_network_traffic() {
     # Check if the last date and time is within the specified time difference
     if [[ -n "$last_date_time" ]] && (( current_time - last_date_time_seconds > restarting_time )); then
         echo "> Last date and time is beyond the specified restarting time."
-        network_activity=$(sudo iftop -t -s 5 -n -N)
+        network_activity=$(iftop -t -s 5 -n -N)
 
         # Extract total network send and receive rates
         total_send_rate=$(echo "$network_activity" | awk '/Total send rate/ { print $4 }')
@@ -61,11 +67,11 @@ analyze_network_traffic() {
 
             echo "> STOPPED <" >> "$output_log_file"
 
-            sudo service ceremonyclient stop
+            service ceremonyclient stop
             sleep 5
-            sudo service ceremonyclient start
+            service ceremonyclient start
             echo "Restarting mining node..."
-            sleep 600
+            sleep 7200
         fi
     fi
 }
