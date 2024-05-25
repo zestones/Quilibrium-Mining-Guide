@@ -27,8 +27,7 @@ sudo sysctl -w net.core.wmem_max=7500000
    Add the following lines to `/etc/sysctl.conf`:
 
 ```bash
-net.core.rmem_max=7500000
-net.core.wmem_max=7500000
+echo "net.core.rmem_max=7500000 net.core.wmem_max=7500000" | sudo tee -a /etc/sysctl.conf
 ```
 
 Then apply the changes:
