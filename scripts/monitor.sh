@@ -40,7 +40,7 @@ analyze_network_traffic() {
     fi
 
     current_time=$(date +%s)
-    restarting_time=7200    # 2 hours
+    restarting_time=14400    # 4 hours
     last_date_time_seconds=$(date -d "$last_date_time" +%s)
 
     # Check if the last date and time is within the specified time difference
