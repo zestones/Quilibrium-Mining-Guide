@@ -196,8 +196,8 @@ sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat # pour affiche
 ```
 
 > [!IMPORTANT]
-> Pour voir son addresse publique il faut ce rendre dans ``ceremonyclient/node``et lancer la commande suivante : \
-> ``GOEXPERIMENT=arenas go run ./... -peer-id``
+> Pour voir son addresse publique il faut ce rendre dans `ceremonyclient/node`et lancer la commande suivante : \
+> `GOEXPERIMENT=arenas go run ./... -peer-id`
 
 ## Resources
 
