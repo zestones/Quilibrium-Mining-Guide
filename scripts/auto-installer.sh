@@ -22,6 +22,8 @@ echo "✅ Git is installed."
 echo "🔍 Checking Git version..."
 git --version
 
+sleep 2
+
 # Step 3: Check if Go is installed
 echo "⏳ Installing Go..."
 if ! [ -x "$(command -v go)" ]; then
@@ -50,7 +52,7 @@ fi
 echo "✅ Go is installed."
 echo "🔍 Checking Go version..."
 go version
-
+sleep 2
 
 # Step 4: Adjust network buffer sizes
 echo "🌐 Adjusting network buffer sizes..."
@@ -66,7 +68,7 @@ else
 fi
 
 sysctl -p
-
+sleep 2
 
 # Step 6: Install Quilibrium Node
 echo "⏳ Installing Quilibrium Node..."
@@ -102,7 +104,7 @@ sleep 1
 git clone https://github.com/QuilibriumNetwork/ceremonyclient.git
 cd ~/ceremonyclient/
 git checkout release
-
+sleep 2
 
 VERSION="1.4.18"                        # Step 6.1: Set the Quilibrium Node version
 ARCH=$(uname -m)                        # Step 6.2: Get the system architecture
