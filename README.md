@@ -192,12 +192,18 @@ Pour démarrer le **Noeud**, vous pouvez utiliser la commande suivante:
 sudo service ceremonyclient start                                      # pour démarrer le service
 sudo service ceremonyclient stop                                       # pour arrêter le service
 sudo service ceremonyclient status                                     # pour vérifier le statut du service (CTRL+C pour quitter)
-sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat # pour afficher le journal du service
+sudo journalctl -u ceremonyclient.service -f --no-hostname -o cat      # pour afficher le journal du service
 ```
 
 > [!IMPORTANT]
 > Pour voir son addresse publique il faut ce rendre dans `ceremonyclient/node`et lancer la commande suivante : \
 > `GOEXPERIMENT=arenas go run ./... -peer-id -signature-check=false`
+
+## Commandes Utiles (pour v.1.4.18)
+
+```bash
+sudo journalctl -u ceremonyclient.service | grep current_frame | tail -n 10
+```
 
 ## Resources
 
