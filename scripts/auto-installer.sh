@@ -31,14 +31,14 @@ if ! [ -x "$(command -v go)" ]; then
     wget https://go.dev/dl/go1.20.14.linux-amd64.tar.gz
     tar -xvf go1.20.14.linux-amd64.tar.gz
     
-    echo "\t> Moving Go to /usr/local..."
+    echo "> Moving Go to /usr/local..."
     mv go /usr/local
 
-    echo "\t> Removing the downloaded tarball..."
+    echo "> Removing the downloaded tarball..."
     rm go1.20.14.linux-amd64.tar.gz
 
     # Set the Go environment variables
-    echo "\t> Setting Go environment variables..."
+    echo "> Setting Go environment variables..."
     
     echo "GOROOT=/usr/local/go" >> ~/.bashrc
     echo "GOPATH=$HOME/go" >> ~/.bashrc
@@ -104,9 +104,10 @@ cd ~/ceremonyclient/
 git checkout release
 
 
-VERSION="1.4.18"             # Step 6.1: Set the Quilibrium Node version
-ARCH=$(uname -m)             # Step 6.2: Get the system architecture
-HOME=$(eval echo ~$HOME_DIR) # Step 6.3: Get the current user's home directory
+VERSION="1.4.18"                        # Step 6.1: Set the Quilibrium Node version
+ARCH=$(uname -m)                        # Step 6.2: Get the system architecture
+HOME=$(eval echo ~$HOME_DIR)            # Step 6.3: Get the current user's home directory
+NODE_PATH="$HOME/ceremonyclient/node"   # Step 6.4: Set the Quilibrium Node path
 
 if [ "$ARCH" = "x86_64" ]; then
     EXEC_START="$NODE_PATH/node-$VERSION-linux-amd64"
