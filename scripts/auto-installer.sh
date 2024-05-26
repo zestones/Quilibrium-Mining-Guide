@@ -26,7 +26,7 @@ sleep 2
 
 # Step 3: Check if Go is installed
 echo "⏳ Installing Go..."
-if ! [ -x "$(command -v go)" ]; then
+if ! [ -x "$(command -v go)" ]; then # TODO: fix Go installation check
     echo "❌ Go is not installed."
     
     apt -q update
@@ -169,5 +169,4 @@ echo "📜 Now I will show the node log below..."
 echo "To exit the log, just type CTRL +C."
 
 # Step 9: See the logs of the ceremonyclient service
-sleep 5  # Add a 5-second delay
 journalctl -u ceremonyclient.service -f --no-hostname -o cat
