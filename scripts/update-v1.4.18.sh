@@ -15,7 +15,9 @@ service ceremonyclient stop
 
 # Step 1:Download Binary
 echo "⏳ Downloading New Release v1.4.18"
-cd  /root/ceremonyclient
+# repository path
+repository_path="/root/ceremonyclient"
+cd $repository_path
 git pull
 git checkout release
 
@@ -32,8 +34,8 @@ CPUQuota=1080%
 Type=simple
 Restart=always
 RestartSec=5s
-WorkingDirectory=/root/ceremonyclient/node
-ExecStart=/root/ceremonyclient/node/node-1.4.18-linux-amd64
+WorkingDirectory=${repository_path}/node
+ExecStart=${repository_path}/node/node-1.4.18-linux-amd64
 
 [Install]
 WantedBy=multi-user.target
