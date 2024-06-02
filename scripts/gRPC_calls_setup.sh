@@ -11,7 +11,7 @@ echo "✨ Welcome! This script will edit your .config/config.yml file and setup 
 echo "====================================================================================="
 echo ""
 echo "Processing... ⏳"
-sleep 7  # Add a 7-second delay
+sleep 1  # Add a 7-second delay
 
 # Function to check if a line exists in a file
 line_exists() {
@@ -23,14 +23,14 @@ add_line_after_pattern() {
     sudo sed -i "/^ *$1:/a\  $2" "$3" || { echo "❌ Failed to add line after '$1'! Exiting..."; exit 1; }
 }
 
-echo " Installing grpcurl..."
+echo "Installing grpcurl..."
 go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 
 # Step 1: Enable gRPC and REST
 echo "🚀 Enabling gRPC and REST..."
 sleep 1
 
-repository_path="~/ceremonyclient/node"
+repository_path="/root/ceremonyclient/node"
 cd $repository_path || { echo "❌ Failed to change directory to ~/ceremonyclient/node! Exiting..."; exit 1; }
 
 # Delete existing lines for listenGrpcMultiaddr and listenRESTMultiaddr if they exist
